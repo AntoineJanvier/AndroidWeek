@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends ListActivity {
 
     final String[] days = new String[] {
@@ -41,23 +44,47 @@ public class MainActivity extends ListActivity {
             "SUNDAY"
     };
 
+    List<Student> studentList = Arrays.asList(
+            new Student("Toto", "Titi"), new Student("Baba", "Bibi"),
+            new Student("Caca", "Kiki"), new Student("Lala", "Lili"),
+            new Student("dsfq", "dsfq"), new Student("fgfreefr", "fgfreefr"),
+            new Student("fgfreefr", "fgfreefr"), new Student("fgfreefr", "fgfreefr"),
+            new Student("fgfreefr", "fgfreefr"), new Student("fgfreefr", "fgfreefr"),
+            new Student("fgfreefr", "fgfreefr"), new Student("fgfreefr", "fgfreefr"),
+            new Student("fgfreefr", "fgfreefr"), new Student("gesrtr", "gesrtr"),
+            new Student("gesrtr", "gesrtr"), new Student("gesrtr", "gesrtr"),
+            new Student("gesrtr", "gesrtr"), new Student("gesrtr", "gesrtr"),
+            new Student("gesrtr", "gesrtr"), new Student("gesrtr", "gesrtr"),
+            new Student("gesrtr", "gesrtr"), new Student("gesrtr", "gesrtr"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge"),
+            new Student("gerge", "gerge"), new Student("gerge", "gerge")
+    );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+        ArrayAdapter<Student> arrayAdapter = new StudentAdapter(
                 this,
                 android.R.layout.simple_list_item_1,
-                days);
+                studentList
+        );
         setListAdapter(arrayAdapter);
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        String day = getListAdapter().getItem(position).toString();
-        TextView textView = (TextView) findViewById(R.id.tv);
-        textView.setText(day);
+        Student student = (Student) getListAdapter().getItem(position);
+        TextView textView = findViewById(R.id.tv);
+        textView.setText(student.getFirstName() + " " + student.getLastName());
     }
 }
